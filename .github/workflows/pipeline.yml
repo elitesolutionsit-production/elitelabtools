@@ -12,10 +12,6 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v1
 
-    - name: pwd output
-      run: |
-        pwd 
-
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
@@ -25,4 +21,3 @@ jobs:
 
     - name: change directory & Deploy static site to S3 bucket
       run: cd /home/runner/work/elitesolutionit-offical-website/elitesolutionit-offical-website/offical-website && aws s3 sync . s3://${{ secrets.S3_BUCKET_NAME }}
-      
