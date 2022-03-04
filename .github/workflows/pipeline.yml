@@ -25,3 +25,4 @@ jobs:
 
     - name: change directory & Deploy static site to S3 bucket
       run: cd /home/runner/work/elitesolutionit-offical-website/elitesolutionit-offical-website/offical-website && aws s3 sync . s3://${{ secrets.S3_BUCKET_NAME }}
+      
