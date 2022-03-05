@@ -3,6 +3,11 @@ variable "website-domain-main" {
   type        = string
 }
 
+variable "website-domain-redirect" {
+  description = "Secondary FQDN that will redirect to the main URL, e.g. www.cloudmaniac.net"
+  type        = string
+}
+
 variable "tags" {
   description = "Tags added to resources"
   default     = {}
