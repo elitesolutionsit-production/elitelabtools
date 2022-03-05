@@ -14,7 +14,7 @@ resource "aws_acm_certificate" "wildcard_website" {
   validation_method         = "DNS"
 
   tags = merge(var.tags, {
-    ManagedBy = "terraform"
+    
     Changed   = formatdate("YYYY-MM-DD hh:mm ZZZ", timestamp())
   })
 
@@ -75,7 +75,7 @@ resource "aws_s3_bucket" "website_logs" {
 
 
   tags = merge(var.tags, {
-    ManagedBy = "terraform"
+    
     Changed   = formatdate("YYYY-MM-DD hh:mm ZZZ", timestamp())
   })
 
@@ -103,7 +103,7 @@ resource "aws_s3_bucket" "website_root" {
   }
 
   tags = merge(var.tags, {
-    ManagedBy = "terraform"
+    
     Changed   = formatdate("YYYY-MM-DD hh:mm ZZZ", timestamp())
   })
 
@@ -128,7 +128,7 @@ resource "aws_s3_bucket" "website_redirect" {
   }
 
   tags = merge(var.tags, {
-    ManagedBy = "terraform"
+    
     Changed   = formatdate("YYYY-MM-DD hh:mm ZZZ", timestamp())
   })
 
@@ -204,7 +204,7 @@ resource "aws_cloudfront_distribution" "website_cdn_root" {
   }
 
   tags = merge(var.tags, {
-    ManagedBy = "terraform"
+    
     Changed   = formatdate("YYYY-MM-DD hh:mm ZZZ", timestamp())
   })
 
@@ -311,7 +311,7 @@ resource "aws_cloudfront_distribution" "website_cdn_redirect" {
   }
 
   tags = merge(var.tags, {
-    ManagedBy = "terraform"
+    
     Changed   = formatdate("YYYY-MM-DD hh:mm ZZZ", timestamp())
   })
 
