@@ -86,7 +86,7 @@ resource "aws_s3_bucket" "website_logs" {
 
 # Creates bucket to store the static website
 resource "aws_s3_bucket" "website_root" {
-  bucket = "${var.website-domain-main}-root"
+  bucket = var.website-domain-main
   acl    = "public-read"
 
   # Comment the following line if you are uncomfortable with Terraform destroying the bucket even if not empty
