@@ -124,7 +124,7 @@ resource "aws_s3_bucket" "website_redirect" {
   }
 
   website {
-    redirect_all_requests_to = "https://${var.website-domain-main}"
+    redirect_all_requests_to = "https://www.${var.website-domain-main}"
   }
 
   tags = merge(var.tags, {
