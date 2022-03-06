@@ -11,30 +11,12 @@ resource "aws_s3_bucket" "bucket" {
   bucket = "www.${var.bucket_name}"
   acl    = "public-read"
 
-  cors_rule {
-    allowed_headers = ["Authorization", "Content-Length"]
-    allowed_methods = ["GET", "POST"]
-    allowed_origins = ["https://www.${var.website-domain}"]
-    max_age_seconds = 3000
-  }
-
   website {
     index_document = "index.html"
     error_document = "404.html"
   }
 
   tags = merge(var.tags, { Name = "elite-mainbucket" })
-}
-
-resource "aws_s3_bucket" "redirect_bucket" {
-  bucket = var.bucket_name
-  acl    = "public-read"
-
-  website {
-    redirect_all_requests_to = "https://www.${var.website-domain}"
-  }
-
-  tags = merge(var.tags, { Name = "elite-mainbucket-redirect" })
 }
 
 # Creates policy to allow public access to the S3 bucket
@@ -55,30 +37,6 @@ resource "aws_s3_bucket_policy" "bucket_policy" {
       ],
       "Resource": [
         "${aws_s3_bucket.bucket.arn}/*"
-      ]
-    }
-  ]
-}
-POLICY
-}
-
-resource "aws_s3_bucket_policy" "bucket_redirect_policy" {
-  bucket = aws_s3_bucket.redirect_bucket.id
-
-  policy = <<POLICY
-{
-  "Version": "2012-10-17",
-  "Id": "PolicyForWebsiteEndpointsPublicContent",
-  "Statement": [
-    {
-      "Sid": "PublicRead",
-      "Effect": "Allow",
-      "Principal": "*",
-      "Action": [
-        "s3:GetObject"
-      ],
-      "Resource": [
-        "${aws_s3_bucket.redirect_bucket.arn}/*"
       ]
     }
   ]
@@ -168,7 +126,7 @@ resource "aws_cloudfront_distribution" "distribution" {
     max_ttl                = 31536000
     compress               = true
   }
-
+  price_class = "PriceClass_200"
   restrictions {
     geo_restriction {
       restriction_type = "none"
@@ -180,7 +138,7 @@ resource "aws_cloudfront_distribution" "distribution" {
   viewer_certificate {
     acm_certificate_arn      = aws_acm_certificate_validation.cert_validate.certificate_arn
     ssl_support_method       = "sni-only"
-    minimum_protocol_version = "TLSv1.1_2016"
+    minimum_protocol_version = "TLSv1.2_2021"
   }
 }
 
