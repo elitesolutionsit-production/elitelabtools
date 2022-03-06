@@ -25,7 +25,7 @@ resource "aws_s3_bucket" "bucket_redirect" {
   acl    = "public-read"
 
   website {
-   redirect_all_requests_to = "https://${var.website-domain}"
+   redirect_all_requests_to = "https://www.${var.website-domain}"
     
   }
 
