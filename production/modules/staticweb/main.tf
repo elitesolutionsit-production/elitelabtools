@@ -25,7 +25,7 @@ resource "aws_s3_bucket" "bucket_redirect" {
   acl    = "public-read"
 
   website {
-   redirect_all_requests_to = "https://www.${var.website-domain}"
+   redirect_all_requests_to = "https://${var.website-domain}"
     
   }
 
@@ -136,7 +136,7 @@ resource "aws_cloudfront_distribution" "distribution" {
   is_ipv6_enabled     = false
   default_root_object = "index.html"
 
-  aliases = ["*.${var.website-domain}"]
+  aliases = [var.website-domain]
 
   custom_error_response {
     error_caching_min_ttl = 0
