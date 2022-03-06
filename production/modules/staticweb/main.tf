@@ -5,19 +5,36 @@ data "aws_route53_zone" "main" {
   private_zone = var.private_zone
 }
 
-# S3 bucket for redirecting non-www to www.
+
+# S3 bucket for website.
 resource "aws_s3_bucket" "bucket" {
-  bucket = var.bucket_name
-  acl    = var.acl
+  bucket = "www.${var.bucket_name}"
+  acl    = "public-read"
 
-  force_destroy = var.force_destroy
-
-  website {
-    index_document = var.index_document
-    error_document = var.error_document
+  cors_rule {
+    allowed_headers = ["Authorization", "Content-Length"]
+    allowed_methods = ["GET", "POST"]
+    allowed_origins = ["https://www.${var.website-domain}"]
+    max_age_seconds = 3000
   }
 
-  tags = var.tags
+  website {
+    index_document = "index.html"
+    error_document = "404.html"
+  }
+
+  tags = merge(var.tags, { Name = "elite-mainbucket" })
+}
+
+resource "aws_s3_bucket" "redirect_bucket" {
+  bucket = var.bucket_name
+  acl    = "public-read"
+
+  website {
+    redirect_all_requests_to = "https://www.${var.website-domain}"
+  }
+
+  tags = merge(var.tags, { Name = "elite-mainbucket-redirect" })
 }
 
 # Creates policy to allow public access to the S3 bucket
@@ -45,6 +62,30 @@ resource "aws_s3_bucket_policy" "bucket_policy" {
 POLICY
 }
 
+resource "aws_s3_bucket_policy" "bucket_redirect_policy" {
+  bucket = aws_s3_bucket.redirect_bucket.id
+
+  policy = <<POLICY
+{
+  "Version": "2012-10-17",
+  "Id": "PolicyForWebsiteEndpointsPublicContent",
+  "Statement": [
+    {
+      "Sid": "PublicRead",
+      "Effect": "Allow",
+      "Principal": "*",
+      "Action": [
+        "s3:GetObject"
+      ],
+      "Resource": [
+        "${aws_s3_bucket.redirect_bucket.arn}/*"
+      ]
+    }
+  ]
+}
+POLICY
+}
+
 ## ACM (AWS Certificate Manager)
 # Creates the wildcard certificate *.<yourdomain.com>
 resource "aws_acm_certificate" "cert" {
@@ -53,7 +94,7 @@ resource "aws_acm_certificate" "cert" {
   subject_alternative_names = ["*.${var.website-domain}"]
   validation_method         = "DNS"
 
-  tags = var.tags
+  tags = merge(var.tags, { Name = "cert" })
   lifecycle {
     ignore_changes = [tags["Changed"]]
   }

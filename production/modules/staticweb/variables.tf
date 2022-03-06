@@ -7,13 +7,6 @@ variable "acl" {
   type        = string
   description = "IF bucket is set to Public, PublicRead, Private etc."
 }
-
-variable "index_document" {
-  type        = string
-  description = "Source code for Official website in html"
-  default     = "index.html"
-}
-
 variable "force_destroy" {
   type        = bool
   default     = true
@@ -25,13 +18,6 @@ variable "private_zone" {
   default     = false
   description = "Whether domain should be private or public. Default is False"
 }
-
-
-variable "error_document" {
-  type        = string
-  description = "Default error message page for website"
-}
-
 
 variable "bucket_name" {
   type        = string
