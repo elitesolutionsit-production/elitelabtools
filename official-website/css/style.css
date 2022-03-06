@@ -769,7 +769,6 @@ ul.social_icon li a:hover {
 
 .copyright::after {
   content: "";
-  position: absolute;
   bottom: 61px;
   background: url(../images/bottom.png);
   width: 290px;
