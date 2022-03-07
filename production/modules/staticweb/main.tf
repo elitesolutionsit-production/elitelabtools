@@ -11,6 +11,10 @@ resource "aws_s3_bucket" "bucket" {
   bucket = var.bucket_name
   acl    = "public-read"
 
+  logging {
+    target_bucket = aws_s3_bucket.website_logs.bucket
+    target_prefix = "${var.bucket_name}/"
+  }
   website {
     index_document = "index.html"
     error_document = "404.html"
@@ -30,6 +34,17 @@ resource "aws_s3_bucket" "bucket_redirect" {
   }
 
   tags = merge(var.tags, { Name = "elite-mainbucket" })
+}
+
+# Creates bucket to store logs
+resource "aws_s3_bucket" "website_logs" {
+  bucket = "${var.bucket_name}-logs"
+  acl    = "log-delivery-write"
+
+  # Comment the following line if you are uncomfortable with Terraform destroying the bucket even if this one is not empty
+  force_destroy = true
+
+  tags = merge(var.tags, { Name = "elite-bucketLogs" })
 }
 
 
@@ -131,6 +146,12 @@ resource "aws_cloudfront_distribution" "distribution" {
       origin_ssl_protocols   = ["TLSv1", "TLSv1.1", "TLSv1.2"]
     }
   }
+
+  logging_config {
+    bucket = aws_s3_bucket.website_logs.bucket_domain_name
+    prefix = "${var.website-domain}/"
+  }
+
 
   enabled             = true
   is_ipv6_enabled     = false
