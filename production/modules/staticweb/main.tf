@@ -8,13 +8,13 @@ data "aws_route53_zone" "main" {
 
 # S3 bucket for website.
 resource "aws_s3_bucket" "bucket" {
-  bucket = "www.${var.bucket_name}"
+  bucket = var.bucket_name
   acl    = "public-read"
 
   website {
     index_document = "index.html"
     error_document = "404.html"
-    
+
   }
 
   tags = merge(var.tags, { Name = "elite-mainbucket" })
@@ -25,8 +25,8 @@ resource "aws_s3_bucket" "bucket_redirect" {
   acl    = "public-read"
 
   website {
-   redirect_all_requests_to = "https://${var.website-domain}"
-    
+    redirect_all_requests_to = "https://${var.website-domain}"
+
   }
 
   tags = merge(var.tags, { Name = "elite-mainbucket" })
@@ -191,4 +191,59 @@ resource "aws_route53_record" "distribution_record" {
     zone_id                = aws_cloudfront_distribution.distribution.hosted_zone_id
     evaluate_target_health = false
   }
+}
+
+resource "aws_route53_health_check" "health_check" {
+  depends_on        = [aws_route53_record.wildcard_validation]
+  fqdn              = var.website-domain
+  port              = 80
+  type              = "HTTP"
+  resource_path     = "/"
+  failure_threshold = "3"
+  request_interval  = "30"
+
+  tags = merge(var.tags, { Name = "elite-R53Health" })
+}
+
+resource "aws_cloudwatch_metric_alarm" "health_check_alarm" {
+  provider            = aws.us-east-1
+  alarm_name          = "${var.website-domain}-health-check"
+  comparison_operator = "LessThanThreshold"
+  evaluation_periods  = "1"
+  metric_name         = "HealthCheckStatus"
+  namespace           = "AWS/Route53"
+  period              = "60"
+  statistic           = "Minimum"
+  threshold           = "1.0"
+  ok_actions          = var.health_check_alarm_sns_topics
+  alarm_actions       = var.health_check_alarm_sns_topics
+  alarm_description   = "This metric monitors the health of the endpoint"
+  treat_missing_data  = "breaching"
+
+  dimensions = {
+    HealthCheckId = aws_route53_health_check.health_check.id
+  }
+}
+
+resource "aws_sns_topic" "user_updates" {
+  name            = var.aws_sns_topic
+  delivery_policy = <<EOF
+{
+  "http": {
+    "defaultHealthyRetryPolicy": {
+      "minDelayTarget": 20,
+      "maxDelayTarget": 20,
+      "numRetries": 3,
+      "numMaxDelayRetries": 0,
+      "numNoDelayRetries": 0,
+      "numMinDelayRetries": 0,
+      "backoffFunction": "linear"
+    },
+    "disableSubscriptionOverrides": false,
+    "defaultThrottlePolicy": {
+      "maxReceivesPerSecond": 1
+    }
+  }
+}
+EOF
 }
