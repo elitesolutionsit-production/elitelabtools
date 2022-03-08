@@ -12,11 +12,6 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v1
 
-###
-    - name: pwd output
-      run: |
-        pwd 
-
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
