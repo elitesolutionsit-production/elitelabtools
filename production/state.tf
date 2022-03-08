@@ -3,7 +3,7 @@ terraform {
     bucket  = "elite-bootcampsite2022"
     key     = "elitebucketstate"
     region  = "us-east-1"
-    profile = "customprofile"
+    profile = "default"
   }
 }
 
