@@ -20,8 +20,6 @@ module "aws_static_website" {
   subscriber_email_addresses = "louisbenagha1@gmail.com"
   name                       = "budget-cloudfront-monthly"
 
-
-
   health_check_alarm_sns_topics = [
     "arn:aws:sns:us-east-1:375866976303:elitesns"
   ]
