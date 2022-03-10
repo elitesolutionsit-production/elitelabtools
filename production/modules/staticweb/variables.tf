@@ -46,3 +46,53 @@ variable "health_check_alarm_sns_topics" {
   default     = []
   description = "A list of SNS topics to notify whenever the health check fails or comes back to normal"
 }
+
+////Budget variables
+
+variable "name" {
+  type = string
+}
+
+variable "budget" {
+  type = string
+}
+
+variable "limit_amount" {
+  type = number
+}
+
+variable "limit_unit" {
+  type = string
+}
+
+variable "time_period_end" {
+  type = string
+}
+
+variable "time_period_start" {
+  type = string
+}
+
+variable "time_unit" {
+  type = string
+}
+
+variable "comparison_operator" {
+  type = string
+}
+
+variable "threshold" {
+  type = number
+}
+
+variable "threshold_type" {
+  type = string
+}
+
+variable "notification_type" {
+  type = string
+}
+
+variable "subscriber_email_addresses" {
+  type = string
+}

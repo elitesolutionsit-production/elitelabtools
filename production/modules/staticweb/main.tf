@@ -169,7 +169,7 @@ resource "aws_cloudfront_distribution" "distribution" {
   }
 
   default_cache_behavior {
-    allowed_methods  = ["GET", "HEAD", "DELETE", "OPTIONS","PATCH", "POST", "PUT"]
+    allowed_methods  = ["GET", "HEAD", "DELETE", "OPTIONS", "PATCH", "POST", "PUT"]
     cached_methods   = ["GET", "HEAD", "OPTIONS"]
     target_origin_id = "origin-bucket-${var.website-domain}"
 
@@ -269,4 +269,23 @@ resource "aws_sns_topic" "user_updates" {
   }
 }
 EOF
+}
+
+resource "aws_budgets_budget" "cloudfront" {
+  name              = var.name
+  budget_type       = var.budget
+  limit_amount      = var.limit_amount
+  limit_unit        = var.limit_unit
+  time_period_end   = var.time_period_end
+  time_period_start = var.time_period_start
+  time_unit         = var.time_unit
+
+
+  notification {
+    comparison_operator        = var.comparison_operator
+    threshold                  = var.threshold
+    threshold_type             = var.threshold_type
+    notification_type          = var.notification_type
+    subscriber_email_addresses = [var.subscriber_email_addresses]
+  }
 }
