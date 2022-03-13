@@ -29,8 +29,8 @@ resource "aws_s3_bucket" "bucket_redirect" {
   acl    = "public-read"
 
   website {
-    redirect_all_requests_to = "https://www.${var.website-domain}"
 
+    redirect_all_requests_to = "https://${var.website-domain}"
   }
 
   tags = merge(var.tags, { Name = "elite-mainbucket" })
@@ -159,7 +159,7 @@ resource "aws_cloudfront_distribution" "distribution" {
   is_ipv6_enabled     = false
   default_root_object = "index.html"
 
-  aliases = [var.website-domain]
+  aliases = [var.website-domain, "www.${var.website-domain}"]
 
   custom_error_response {
     error_caching_min_ttl = 0
@@ -187,6 +187,7 @@ resource "aws_cloudfront_distribution" "distribution" {
     max_ttl                = 0
     compress               = true
   }
+  
   price_class = "PriceClass_200"
   restrictions {
     geo_restriction {
