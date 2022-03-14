@@ -44,36 +44,6 @@ body {
   font-weight: normal;
 }
 
-.timer_heading {
-  color: #fff;
-  font-weight: 100;
-  font-size: 20px;
-  /* margin: 40px 0px 20px; */
-}
-#clockdiv {
-  font-family: sans-serif;
-  color: #fff;
-  display: inline-block;
-  font-weight: 100;
-  text-align: center;
-  font-size: 15px;
-}
-#clockdiv > div {
-  padding: 10px;
-  border-radius: 3px;
-  background: #1888df;
-  display: inline-block;
-}
-#clockdiv div > span {
-  padding: 10px;
-  border-radius: 3px;
-  background: #003881;
-  display: inline-block;
-}
-.smalltext {
-  /* padding-top: 5px; */
-  font-size: 16px;
-}
 a {
   color: #1f1f1f;
   text-decoration: none !important;
@@ -351,10 +321,7 @@ button {
   color: #fff;
   line-height: 40px;
 }
-.logo_img {
-  height: 120px;
-  width: 120px;
-}
+
 .banner_main {
   padding: 90px 0 190px 0;
 }
