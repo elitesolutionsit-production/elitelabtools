@@ -187,7 +187,7 @@ resource "aws_cloudfront_distribution" "distribution" {
     max_ttl                = 0
     compress               = true
   }
-  
+
   price_class = "PriceClass_200"
   restrictions {
     geo_restriction {
@@ -287,6 +287,6 @@ resource "aws_budgets_budget" "cloudfront" {
     threshold                  = var.threshold
     threshold_type             = var.threshold_type
     notification_type          = var.notification_type
-    subscriber_email_addresses = [var.subscriber_email_addresses]
+    subscriber_email_addresses = var.subscriber_email_addresses
   }
 }

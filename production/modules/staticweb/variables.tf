@@ -94,5 +94,6 @@ variable "notification_type" {
 }
 
 variable "subscriber_email_addresses" {
-  type = string
+  type    = list(string)
+  default = []
 }
