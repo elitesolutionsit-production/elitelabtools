@@ -17,7 +17,7 @@ module "aws_static_website" {
   time_period_start          = "2022-03-09_00:00"
   bucket_name                = "elitestaticweb"
   website-domain             = "elitelabtools.com"
-  subscriber_email_addresses = "louisbenagha1@gmail.com"
+  subscriber_email_addresses = ["elitecloudbootcamp@outlook.com", "elitesolutionsit@outlook.com"]
   name                       = "budget-cloudfront-monthly"
 
   health_check_alarm_sns_topics = [
