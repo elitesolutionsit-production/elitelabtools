@@ -1,5 +1,15 @@
 This repository is for production promo dedicated to **elitesolutionsIT cloud computing BootCamp**.
 
+# PREQUISTES:
+ - Install AWS CLI
+ - install terraform on windows
+
+# AWS install
+ - make sure to use aws configure to add you creds.
+ ```
+ aws configure
+ ```
+
 # Table of Contents
 * [App](#App)
 * [Pipeline](#Pipeline)
@@ -19,6 +29,8 @@ This repository is for production promo dedicated to **elitesolutionsIT cloud co
  - Copies App folder structure from local Dir to AWS S3 Bucket.
  - App is curentlt been delivered through CloudFront and spread across edge locations.
 
+ # Example Code like the Pipeline used to Run this App
+ A [Github Action](https://github.com/features/actions) for this kind of AWS pipeline Job.
  ```
  name: Upload website
 
@@ -48,3 +60,9 @@ jobs:
  # Infrastructure
  Infrastructure is currently been managed with terraform (IAC), it also use's a terraform workspace undernite.
 
+| Property                   | Required | Default | Description
+    |
+|----------------------------|----------|---------|--------------------------------------------------------|
+AWS_ACCESS_KEY_ID            | True     |         | Expects a string value here, for aws access key id.
+
+AWS_SECRET_ACCESS_KEY        | True     |         | Expects a string value here, for aws secret access key.
