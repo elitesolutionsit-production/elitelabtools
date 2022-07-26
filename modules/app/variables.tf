@@ -77,23 +77,33 @@ variable "time_unit" {
   type = string
 }
 
-variable "comparison_operator" {
-  type = string
-}
+# variable "comparison_operator" {
+#   type = string
+# }
 
-variable "threshold" {
-  type = number
-}
+# variable "threshold" {
+#   type = number
+# }
 
-variable "threshold_type" {
-  type = string
-}
+# variable "threshold_type" {
+#   type = string
+# }
 
-variable "notification_type" {
-  type = string
-}
+# variable "notification_type" {
+#   type = string
+# }
 
-variable "subscriber_email_addresses" {
-  type    = list(string)
-  default = []
+# variable "subscriber_email_addresses" {
+#   type    = list(string)
+#   default = []
+# }
+
+variable "notifications" {
+  type = list(object({
+    comparison_operator        = string
+    threshold                  = number
+    threshold_type             = string
+    notification_type          = string
+    subscriber_email_addresses = list(string)
+  }))
 }

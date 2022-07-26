@@ -273,6 +273,7 @@ EOF
 }
 
 resource "aws_budgets_budget" "cloudfront" {
+
   name              = var.name
   budget_type       = var.budget
   limit_amount      = var.limit_amount
@@ -282,11 +283,22 @@ resource "aws_budgets_budget" "cloudfront" {
   time_unit         = var.time_unit
 
 
-  notification {
-    comparison_operator        = var.comparison_operator
-    threshold                  = var.threshold
-    threshold_type             = var.threshold_type
-    notification_type          = var.notification_type
-    subscriber_email_addresses = var.subscriber_email_addresses
+  # notification {
+  #   comparison_operator        = var.comparison_operator
+  #   threshold                  = var.threshold
+  #   threshold_type             = var.threshold_type
+  #   notification_type          = var.notification_type
+  #   subscriber_email_addresses = var.subscriber_email_addresses
+  # }
+
+  dynamic "notification" {
+    for_each = var.notifications
+    content {
+      comparison_operator        = notification.value.comparison_operator
+      threshold                  = notification.value.threshold
+      threshold_type             = notification.value.threshold_type
+      notification_type          = notification.value.notification_type
+      subscriber_email_addresses = notification.value.subscriber_email_addresses
+    }
   }
 }
