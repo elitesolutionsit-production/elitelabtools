@@ -59,10 +59,4 @@ jobs:
 
  # Infrastructure
  Infrastructure is currently been managed with terraform (IAC), it also use's a terraform workspace undernite.
-
-| Property                   | Required | Default | Description
-    |
-|----------------------------|----------|---------|--------------------------------------------------------|
-AWS_ACCESS_KEY_ID            | True     |         | Expects a string value here, for aws access key id.
-
-AWS_SECRET_ACCESS_KEY        | True     |         | Expects a string value here, for aws secret access key.
+ - The backend state is been managed in an AWS S3 bucket.
