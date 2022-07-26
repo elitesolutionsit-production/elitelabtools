@@ -64,10 +64,9 @@ jobs:
  A [Module] is used to managed the entire infrastructure
  Example:
  ```
- module "aws_static_website" {
-  source = "./modules/staticweb"
-
-  threshold           = 100
+module "aws_static_website" {
+  source = "./modules/app/"
+  
   force_destroy       = false
   private_zone        = false
   enable_health_check = true
@@ -75,10 +74,11 @@ jobs:
   limit_unit          = "USD"
   budget              = "COST"
   time_unit           = "MONTHLY"
-  comparison_operator = "GREATER_THAN"
-  threshold_type      = "PERCENTAGE"
-  notification_type   = "FORECASTED"
-  acl                 = "public-read"
+  acl               = "public-read"
+  time_period_end   = "2087-06-15_00:00"
+  time_period_start = "2022-03-09_00:00"
+  bucket_name       = "elitestaticweb"
+  website-domain    = "elitelabtools.com"
   }
 ```
 # Sample of backend state
