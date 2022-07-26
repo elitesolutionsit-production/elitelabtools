@@ -19,6 +19,32 @@ This repository is for production promo dedicated to **elitesolutionsIT cloud co
  - Copies App folder structure from local Dir to AWS S3 Bucket.
  - App is curentlt been delivered through CloudFront and spread across edge locations.
 
+ ```
+ name: Upload website
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-1
+
+    - name: change directory & Deploy static site to S3 bucket
+      run: cd /home/runner/work/elitesolutionsit-official-website/elitesolutionsit-official-website/app && aws s3 sync . s3://${{ secrets.S3_BUCKET_NAME }}
+```
+
  # Infrastructure
  Infrastructure is currently been managed with terraform (IAC), it also use's a terraform workspace undernite.
- 
+
