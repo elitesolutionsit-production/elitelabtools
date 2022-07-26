@@ -81,3 +81,14 @@ jobs:
   acl                 = "public-read"
   }
 ```
+# Sample of backend state
+```
+terraform {
+  backend "s3" {
+    bucket  = "< bucket_name>"
+    key     = "< bucket key name >"
+    region  = "us-east-1"   # Any region in aws allocated for your project.
+    profile = "default"     # Can be a custom profile.
+  }
+}
+```
