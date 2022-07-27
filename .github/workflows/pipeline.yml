@@ -1,9 +1,11 @@
-name: Upload website
+name: Upload App to S3
 
 on:
+  # Set your workflow to run on push events to the develop and all feature branches
   push:
     branches:
-      - main
+      - develop
+      - feature/*
 
 jobs:
   deploy:
