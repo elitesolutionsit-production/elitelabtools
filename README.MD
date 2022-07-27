@@ -60,11 +60,12 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-1
 ```
-## Inputs
+## github actions variables
 
-| Name              | Description | Type    | Default | Required |
-|-------------------|-------------|---------|---------|:--------:|
-| aws-access-key-id | access key | `string` | `""`     | yes |
+| Name                  | Description | Type    | Default | Required |
+|-----------------------|-------------|---------|---------|:--------:|
+| aws-access-key-id     | access key  | `string` | `""`     | yes |
+| aws-secret-access-key | secret key  | `string` | `""`     | yes |
 
  # Infrastructure
  Infrastructure is currently been managed with terraform (IAC).
