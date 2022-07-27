@@ -63,7 +63,7 @@ jobs:
  Infrastructure is currently been managed with terraform (IAC), it also use's a terraform workspace undernite.
  - The backend state is been managed in an AWS S3 bucket.
 
- A [Module] is used to managed the entire infrastructure
+ A Module is used to managed the entire infrastructure
  Example:
  ```
 module "aws_static_website" {
