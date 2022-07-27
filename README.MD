@@ -87,7 +87,8 @@ module "aws_static_website" {
   }
 ```
 # Sample of backend state
-```
+
+```hcl
 terraform {
   backend "s3" {
     bucket  = "< bucket_name>"
@@ -103,3 +104,9 @@ terraform {
 | Name | Version |
 |------|---------|
 | aws | ~> 3.0 |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| bucket\_name | custom bucket | `string` | `""` | yes |
