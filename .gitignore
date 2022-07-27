@@ -3,3 +3,7 @@
 *.terraform/*
 *terraform.tfstate*
 *../terraform.tfstate*
+*.gitignore*
+*.tf*
+*.github/*
+modules
