@@ -9,7 +9,7 @@ This repository is for production promo dedicated to **elitesolutionsIT cloud co
  ```
  aws configure
  ```
- image.png
+ ![aws credentials output](images/awscreds.png)
 
 # Table of Contents
 * [App](#App)
