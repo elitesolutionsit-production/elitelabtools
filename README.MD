@@ -6,10 +6,10 @@ This repository is for production promo dedicated to **elitesolutionsIT cloud co
 
 # PREQUISTES:
  - Install AWS CLI
- - install terraform on windows
+ - Install terraform on windows
 
 # AWS install
- - make sure to use aws configure to add you creds.
+ - make sure to use aws configure to add your creds.
  ```
  aws configure
  ```
@@ -32,7 +32,7 @@ This repository is for production promo dedicated to **elitesolutionsIT cloud co
  # Features
  - Use's AWS Creds set on the Repo level to Authenticate AWS.
  - Copies App folder structure from local Dir to AWS S3 Bucket.
- - App is curentlt been delivered through CloudFront and spread across edge locations.
+ - App is currently been delivered through CloudFront and spread across Edge locations.
 
  # Example Code like the Pipeline used to Run this App
  A [Github Action](https://github.com/features/actions) for this kind of AWS pipeline Job.
@@ -60,7 +60,7 @@ jobs:
 ```
 
  # Infrastructure
- Infrastructure is currently been managed with terraform (IAC), it also use's a terraform workspace undernite.
+ Infrastructure is currently been managed with terraform (IAC).
  - The backend state is been managed in an AWS S3 bucket.
 
  A Module is used to managed the entire infrastructure
