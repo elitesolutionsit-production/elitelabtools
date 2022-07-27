@@ -67,7 +67,8 @@ jobs:
 
  A Module is used to managed the entire infrastructure
  Example:
- ```
+ 
+ ```hcl
 module "aws_static_website" {
   source = "./modules/app/"
   
@@ -96,3 +97,9 @@ terraform {
   }
 }
 ```
+
+## Providers
+
+| Name | Version |
+|------|---------|
+| aws | ~> 3.0 |
