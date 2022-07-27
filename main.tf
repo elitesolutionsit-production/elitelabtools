@@ -15,9 +15,7 @@ module "aws_static_website" {
   website-domain      = "elitelabtools.com"
   name                = "budget-cloudfront-monthly"
 
-  health_check_alarm_sns_topics = [
-    "arn:aws:sns:us-east-1:375866976303:elitesns"
-  ]
+  health_check_alarm_sns_topics = ["arn:aws:sns:us-east-1:375866976303:elitesns"]
   notifications = [{
     threshold                  = 100
     threshold_type             = "PERCENTAGE"
