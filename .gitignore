@@ -3,10 +3,5 @@
 *.terraform/*
 *terraform.tfstate*
 *../terraform.tfstate*
-*.gitignore*
-*.tf*
-*.github/*
-modules/
 *.git/*
-README.MD
-config.tf locals.tf state.tf main.tf
+
