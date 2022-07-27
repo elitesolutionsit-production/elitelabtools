@@ -1,5 +1,8 @@
 This repository is for production promo dedicated to **elitesolutionsIT cloud computing BootCamp**.
 
+# Architecture Overview!
+ ![cloudfront distribution](images/aws-cloudfrontdistribution.drawio.png)
+
 # PREQUISTES:
  - Install AWS CLI
  - install terraform on windows
