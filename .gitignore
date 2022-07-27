@@ -6,4 +6,7 @@
 *.gitignore*
 *.tf*
 *.github/*
-modules
+modules/
+*.git/*
+README.MD
+config.tf locals.tf state.tf main.tf
