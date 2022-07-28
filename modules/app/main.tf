@@ -30,7 +30,7 @@ resource "aws_s3_bucket" "bucket_redirect" {
 
   website {
 
-    redirect_all_requests_to = "https://${var.website-domain}"
+    redirect_all_requests_to = "https://${var.website-domain}/app"
   }
 
   tags = merge(var.tags, { Name = "elite-mainbucket" })
