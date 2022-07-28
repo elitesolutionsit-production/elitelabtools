@@ -25,4 +25,4 @@ jobs:
       run:  cd /home/runner/work/elitelabtools/elitelabtools/app
 
     - name: run s3 sync  
-      run:  aws s3 sync . s3://${{ secrets.S3_BUCKET_NAME }}
+      run:  aws s3 cp app/ s3://${{ secrets.S3_BUCKET_NAME }}
