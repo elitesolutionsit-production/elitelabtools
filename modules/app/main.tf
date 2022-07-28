@@ -1,7 +1,7 @@
 ## Route 53
 # Provides details about the zone
 data "aws_route53_zone" "main" {
-  name         = var.website-domain
+  name         = "elitelabtools.com"
   private_zone = var.private_zone
 }
 
@@ -104,7 +104,7 @@ POLICY
 resource "aws_acm_certificate" "cert" {
   provider                  = aws.us-east-1
   domain_name               = var.website-domain
-  subject_alternative_names = ["*.${var.website-domain}"]
+  subject_alternative_names = ["*.elitelabtools.com"]
   validation_method         = "DNS"
 
   tags = merge(var.tags, { Name = "cert" })
@@ -219,7 +219,7 @@ resource "aws_route53_record" "distribution_record" {
 
 resource "aws_route53_health_check" "health_check" {
   depends_on        = [aws_route53_record.wildcard_validation]
-  fqdn              = var.website-domain
+  fqdn              = "elitelabtools.com"
   port              = 80
   type              = "HTTP"
   resource_path     = "/"

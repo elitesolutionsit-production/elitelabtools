@@ -12,7 +12,7 @@ module "aws_static_website" {
   time_period_end     = "2087-06-15_00:00"
   time_period_start   = "2022-03-09_00:00"
   bucket_name         = "elitestaticweb"
-  website-domain      = "elitelabtools.com"
+  website-domain      = "cloudbootcamp.elitelabtools.com"
   name                = "budget-cloudfront-monthly"
 
   health_check_alarm_sns_topics = ["arn:aws:sns:us-east-1:375866976303:elitesns"]
