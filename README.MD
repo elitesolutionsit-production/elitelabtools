@@ -2,7 +2,7 @@ This repository is for production promo dedicated to **elitesolutionsIT cloud co
 
 # Architecture Overview!
  ![cloudfront distribution](images/aws-cloudfrontdistribution.drawio.png)
- [elitelabtools.com](https://elitelabtools.com/)
+ [cloudbootcamp.elitelabtools.com](https://cloudbootcamp.elitelabtools.com/)
 
 # PREQUISTES:
  - Install AWS CLI
