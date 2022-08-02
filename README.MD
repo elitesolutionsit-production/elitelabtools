@@ -6,10 +6,10 @@ This repository is for production promo dedicated to **elitesolutionsIT cloud co
 
 # PREQUISTES:
  - Install AWS CLI
- - install terraform on windows
+ - Install terraform on windows
 
 # AWS install
- - make sure to use aws configure to add you creds.
+ - make sure to use aws configure to add your creds.
  ```
  aws configure
  ```
@@ -32,7 +32,7 @@ This repository is for production promo dedicated to **elitesolutionsIT cloud co
  # Features
  - Use's AWS Creds set on the Repo level to Authenticate AWS.
  - Copies App folder structure from local Dir to AWS S3 Bucket.
- - App is curentlt been delivered through CloudFront and spread across edge locations.
+ - App is currently been delivered through CloudFront and spread across Edge locations.
 
  # Example Code like the Pipeline used to Run this App
  A [Github Action](https://github.com/features/actions) for this kind of AWS pipeline Job.
@@ -57,18 +57,22 @@ jobs:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-1
-
-    - name: change directory & Deploy static site to S3 bucket
-      run: cd /home/runner/work/elitesolutionsit-official-website/elitesolutionsit-official-website/app && aws s3 sync . s3://${{ secrets.S3_BUCKET_NAME }}
 ```
+## github actions variables
+
+| Name                  | Description | Type    | Default | Required |
+|-----------------------|-------------|---------|---------|:--------:|
+| aws-access-key-id     | access key  | `string` | `""`     | yes |
+| aws-secret-access-key | secret key  | `string` | `""`     | yes |
 
  # Infrastructure
- Infrastructure is currently been managed with terraform (IAC), it also use's a terraform workspace undernite.
+ Infrastructure is currently been managed with terraform (IAC).
  - The backend state is been managed in an AWS S3 bucket.
 
  A Module is used to managed the entire infrastructure
  Example:
- ```
+ 
+ ```hcl
 module "aws_static_website" {
   source = "./modules/app/"
   
@@ -87,7 +91,8 @@ module "aws_static_website" {
   }
 ```
 # Sample of backend state
-```
+
+```hcl
 terraform {
   backend "s3" {
     bucket  = "< bucket_name>"
@@ -97,3 +102,15 @@ terraform {
   }
 }
 ```
+
+## Providers
+
+| Name | Version |
+|------|---------|
+| aws | ~> 3.0 |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| bucket\_name | custom bucket | `string` | `""` | yes |
